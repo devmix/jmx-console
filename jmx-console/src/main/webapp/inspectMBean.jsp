@@ -262,7 +262,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                     }
                 } else {
                     if (attrType.equals("[Ljavax.management.ObjectName;")) {
-                        ObjectName[] names = (ObjectName[]) Server.getMBeanAttributeObject(objectNameString, attrName);
+                        ObjectName[] names = (ObjectName[]) Server.getMBeanAttributeObjectName(objectNameString, attrName);
                         if (names != null) {
                             for (int i = 0; i < names.length; i++) {
                                 out.print(
@@ -271,7 +271,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                             }
                         }
                     } else if (attrType.startsWith("[")) {
-                        Object arrayObject = Server.getMBeanAttributeObject(objectNameString, attrName);
+                        Object arrayObject = Server.getMBeanAttributeObjectArray(objectNameString, attrName);
                         if (arrayObject != null) {
                             for (int i = 0; i < Array.getLength(arrayObject); ++i) {
                                 out.println(fixValue(Array.get(arrayObject, i)));

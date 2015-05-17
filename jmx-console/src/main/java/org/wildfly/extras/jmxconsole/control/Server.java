@@ -102,10 +102,22 @@ public class Server {
         return mbeanData;
     }
 
-    public static Object getMBeanAttributeObject(String name, String attrName) throws JMException {
+    public static Object getMBeanAttributeObjectName(String name, String attrName) throws JMException {
         MBeanServer server = getMBeanServer();
         ObjectName objName = new ObjectName(name);
         Object value = server.getAttribute(objName, attrName);
+        return value;
+    }
+
+    public static Object getMBeanAttributeObjectArray(String name, String attrName) throws JMException {
+        MBeanServer server = getMBeanServer();
+        ObjectName objName = new ObjectName(name);
+        Object value;
+        try {
+            value = server.getAttribute(objName, attrName);
+        } catch (IllegalArgumentException e) {
+            return new Object[]{e};
+        }
         return value;
     }
 
